@@ -1,0 +1,9 @@
+language: java
+jdk:
+  - oraclejdk8
+script:
+  - |
+    mvn -q integration-test install
+cache:
+  directories:
+  - $HOME/.m2
