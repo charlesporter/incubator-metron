@@ -1,0 +1,37 @@
+
+- hosts: localhost
+  tasks:
+#  - include_vars: "./core_site_response.yml"
+  - shell: cat ./core_site_response.yml
+    register: result
+
+
+  - set_fact: core_site_response="{{ result.stdout }}"
+#
+#  - name: "print test"
+#    debug:
+#      msg: "this is a test"
+#
+#  - name: "print core site response"
+#    debug:
+#      msg: "{{core_site_response }}"
+#
+  - name: "print core site response.content"
+    debug:
+      msg: "{{core_site_response.content }}"
+
+#  - name: "core_site_response.content from_json"
+#    debug:
+#      msg: "{{ (core_site_response.content | from_json) }}"
+#
+#  - name: "core_site_response from_json "
+#    debug:
+#      msg: "{{core_site_response | from_json }}"
+
+  - name:  "debug default FS from core_site_response"
+    debug:
+      msg: "{{ core_site_response.content['items'][0] }}"
+
+  - name:  "debug default FS from core_site_response"
+    debug:
+      msg: "{{ (core_site_response.content)['items'][0].properties['fs.defaultFS'] }}"
