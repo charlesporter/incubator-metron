@@ -15,37 +15,58 @@
 #  limitations under the License.
 #
 
+#node1    #phc-dltham01
+#node2    #phc-dlthas02
+#node3    #phc-dlthdf01
+#node4   #phc-dlthas01
+
+
+[ambari_master]
 #node1
+phc-dltham01
+
+#minimum of 3 - 6 from 12 node cluser
+[ambari_slave]
 #node2
 #node3
 #node4
 
-[ambari_master]
-node1
-
-#minimum of 3 - 6 from 12 node cluser
-[ambari_slave]
-node2
-node3
-node4
+phc-dltham01
+phc-dlthas02
+phc-dlthdf01
+phc-dlthas01
 
 #last ambari_slave
 [hadoop_client]
-node4
+#node4
+phc-dlthas01
+
+[metron_hbase_tables]
+#node1
+phc-dltham01
+
+[metron_kafka_topics]
+#node3
+phc-dlthdf01
 
 [enrichment]
-node4
+#node4
+phc-dlthas01
 
 #1 or more
 [search]
-node1
+#node1
+phc-dltham01
 
 #same as mysql in 12 node topology
 [web]
-node3
+#node3
+phc-dlthdf01
 
 [mysql]
-node3
+#node3
+#node2
+phc-dlthas02
 
 [metron:children]
 enrichment
