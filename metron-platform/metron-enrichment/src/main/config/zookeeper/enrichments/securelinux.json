@@ -1,0 +1,19 @@
+{
+  "index": "securelinux",
+  "batchSize": 5,
+  "enrichment" : {
+    "fieldMap": {
+      "geo": ["src_ip"],
+      "host": ["host"]
+    }
+  },
+  "threatIntel": {
+    "fieldMap": {
+      "hbaseThreatIntel": ["src_ip"]
+    },
+    "fieldToTypeMap": {
+      "src_ip" : ["malicious_ip"]
+    }
+  }
+}
+

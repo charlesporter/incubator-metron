@@ -1,0 +1,13 @@
+{
+  "parserClassName":"org.apache.metron.parsers.selinux.GrokSecureLinuxParser",
+  "sensorTopic":"messageslinux",
+  "parserConfig":
+  {
+    "grokPath":"/patterns/messageslinux",
+    "patternLabel":"SECUREBASE",
+    "timestampField":"timestamp_string",
+    "dateFormat":"MMM dd HH:mm:ss",
+    "logMessageField":"log_message",
+    "logMessageGrokLabels":["MESSAGE1","MESSAGE2","MESSAGE3","MESSAGE4","MESSAGE5","STATECHANGE","MESSAGE6","ACTIVATIONFAILED","POLICYSET","LISTENING"]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "parserClassName":"org.apache.metron.parsers.selinux.GrokSecureLinuxParser",
+  "sensorTopic":"securelinux",
+  "parserConfig":
+  {
+    "grokPath":"/patterns/securelinux",
+    "patternLabel":"SECUREBASE",
+    "timestampField":"timestamp_string",
+    "dateFormat":"MMM dd HH:mm:ss",
+    "logMessageField":"log_message",
+    "logMessageGrokLabels":["SECURESU","SECURESUDORUN","SECURESSHDPUBKEY","SECURESSHDREST","SECURESSHDREST1","SECURESSHDREST2","SECURESSHDREST3","SECURESSHDREST4","SECURESSHDREST5","SECURESSHDREST6","SECURESSHDREST7","SECURESSHDREST8","SECURENETREG","SECURENETBADGE"]
+  }
+}
