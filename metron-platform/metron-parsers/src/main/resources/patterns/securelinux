@@ -21,7 +21,7 @@ MESSAGE .*
 # Log end - the level of the log and the message
 LOGEND %{MESSAGE:log_message}
 
-#  Log Message Patterns
+#  Log Message Patterns
 SECUREPROG %{PROG:program}(?:\[%{POSINT:pid}\])?
 SECUREHOST %{IPORHOST:host}
 SECUREBASE (%{NIFI_MSG_TIMESTAMP:nifi_timestamp}%{SPACE:UNWANTED})?%{LOG_MSG_TIMESTAMP:secure_timestamp}%{SPACE:UNWANTED}%{SECUREHOST:UNWANTED}%{SPACE:UNWANTED}%{SECUREPROG:UNWANTED}:%{SPACE:UNWANTED}%{GREEDYDATA:log_message}
@@ -29,7 +29,7 @@ SECURESU (runuser: |)%{PROG:pam_program}(?:\[%{POSINT:pid}\])? session %{WORD:se
 SECURESUDORUN (%{USER:user} : TTY=%{DATA:tty} ; PWD=%{DATA:password} ; USER=%{USER:sudo_runas_user} ; COMMAND=%{GREEDYDATA:sudo_command}|\S+:%{SPACE}(TGT verified|error reading keytab %{GREEDYDATA:UNWANTED}|authentication %{WORD:authentication} for '%{USER:user}'%{GREEDYDATA:UNWANTED}|%{GREEDYDATA:UNWANTED}user=%{USER:user}))
 SECURESSHDPUBKEY (Found matching RSA key: %{GREEDYDATA:rsa_key}|%{WORD} publickey for %{USER:user} from %{IPORHOST:src_ip}( port %{NUMBER:port} %{WORD}( \[preauth\]|: RSA %{GREEDYDATA:rsa_key}|)|))
 SECURESSHDREST Did not receive identification string from %{IPORHOST:src_ip}
-SECURESSHDREST1 pam_unix\((sshd|crond):session\): session %{WORD:session} for user %{USER:user}
+SECURESSHDREST1 pam_unix\((%{DATA:user_command}):session\): session %{WORD:session} for user %{USER:user}
 SECURESSHDREST2 Starting session: command for %{USER:user} from %{IPORHOST:src_ip}
 SECURESSHDREST3 Connection from %{IPORHOST:src_ip}
 SECURESSHDREST4 Accepted (password|publickey) for %{DATA:authenticated_user} from %{IPORHOST:src_ip} port %{POSINT:port}
@@ -39,7 +39,7 @@ SECURESSHDREST7 User child is on pid %{NUMBER}
 SECURESSHDREST8 Set %{UNIXPATH} to %{NUMBER}
 SECURENETREG connect from %{IPORHOST:src_ip}%{GREEDYDATA:UNWANTED}
 SECURENETBADGE (%{WORD:whois_action}|Authentication %{WORD:auth_result}): (reply from %{URI:whois_uri}: Result: %{GREEDYDATA:whois_result}|User: %{USER:user}, %{GREEDYDATA:auth_result_detail}, From: %{IPORHOST:src_ip}, %{GREEDYDATA:UNWANTED}, URL: %{URI:netbadge_source_uri})
-AUTHFAILURE pam_unix\((sshd|crond):auth\): authentication failure; logname=%{DATA:logname} uid=%{INT:uid} euid=%{INT:euid} tty=%{DATA:tty} ruser=%{DATA:failed_authentication_user} rhost=%{IPORHOST:src_ip}
+AUTHFAILURE pam_unix\((%{DATA:user_command}):auth\): authentication failure; logname=%{DATA:logname} uid=%{INT:uid} euid=%{INT:euid} tty=%{DATA:tty} ruser=%{DATA:failed_authentication_user} rhost=%{IPORHOST:src_ip}
 USERMESSAGE %{GREEDYDATA:message} user (%{USER:user}|%{DATA:user})(%{SPACE:UNWANTED}from %{IPORHOST:src_ip})?(%{SPACE:UNWANTED}port %{POSINT:port})?(%{SPACE:UNWANTED}%{WORD:process})?
 AUTHENTICATION_SUCCEEDED_PASSWORDLESS (pam_unix|pam_vas): Authentication <succeeded passwordless> for <%{DATA:method}> user: <%{DATA:authenticated_user}> account: <%{DATA:account}> service: <%{WORD:service}> reason: <%{GREEDYDATA:reason}>
 AUTHENTICATION_SUCCEEDED (pam_unix|pam_vas): Authentication <succeeded> for <%{DATA:method}> user: <%{DATA:authenticated_user}> account: <%{DATA:account}> service: <%{WORD:service}> reason: <%{GREEDYDATA:reason}>
